@@ -1,0 +1,20 @@
+<mat-form-field class="input-container" appearance="outline">
+    <mat-label>{{ label }}</mat-label>
+    <mat-icon matPrefix *ngIf="iconePrefixo">
+        {{ iconePrefixo }}
+    </mat-icon>
+    <input
+        matInput
+        [placeholder]="placeholder"
+        [formControl]="control"
+        [required]="true"
+        [name]="label"
+        ngDefaultControl
+        [matAutocomplete]="auto">
+    <mat-icon matSuffix>search</mat-icon>
+    <mat-autocomplete [displayWith]="displayFn" autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let areaComum of filteredOptions$ | async" [value]="areaComum">
+          {{areaComum.nome}}
+        </mat-option>
+      </mat-autocomplete>
+</mat-form-field>

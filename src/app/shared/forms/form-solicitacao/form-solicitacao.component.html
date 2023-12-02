@@ -1,0 +1,53 @@
+<app-container>
+    <mat-card>
+      <form [formGroup]="solicitacaoForm">
+        <mat-card-title>
+          Nova Solicitação
+        </mat-card-title>
+          
+        <mat-card-content>
+          <div class="grid-container">
+            <div class="grid-item">
+              <app-dropdown-setor
+                label="Setor"
+                placeholder="Setor do Condomínio"
+                [control]="setorControl">
+              </app-dropdown-setor>
+              <mat-error *ngIf="setorControl?.errors && setorControl?.touched ">Setor é obrigatório</mat-error>
+            </div>
+
+            <div class="grid-item">
+              <app-dropdown-area-comum
+                label="Área Comum"
+                placeholder="Área Comum do Condomínio"
+                [control]="areaComumControl">
+              </app-dropdown-area-comum>
+              <mat-error *ngIf="areaComumControl?.errors && areaComumControl?.touched">Área Comum é obrigatório</mat-error>
+            </div>  
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Assunto</mat-label>
+              <input matInput formControlName="assunto" placeholder="Resumo da Solicitação">
+              <mat-error *ngIf="solicitacaoForm.get('assunto')?.errors?.['minlength']">Assunto mínimo de 3 caracteres</mat-error>
+              <mat-error *ngIf="solicitacaoForm.get('assunto')?.touched">Assunto obrigatorio.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Explique o que precisa :)</mat-label>
+              <textarea matInput formControlName="descricao" placeholder="Preciso de ajuda com ... "></textarea>
+              <mat-error *ngIf="solicitacaoForm.get('descricao')?.errors?.['minlength']">Descricao mínimo de 3 caracteres</mat-error>
+            </mat-form-field>
+            
+          </div><!--container-->
+        </mat-card-content>
+
+        <mat-card-actions class="full-width">
+          <button (click)="executarAcao(solicitacaoForm)" mat-flat-button
+            [disabled]="solicitacaoForm.invalid"
+            color="primary"
+          >CADASTRAR
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+</app-container>

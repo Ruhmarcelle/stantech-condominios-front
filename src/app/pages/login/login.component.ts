@@ -1,3 +1,5 @@
+import { Sessao } from './../../core/types/type';
+import { SessaoService } from './../../core/services/sessao.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,9 +15,11 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup; 
   private usuarioLogado: boolean = false; 
   private msgLogin: string = '';
-  
+  private sessao = {} as Sessao;
+
   constructor(private formBuilder: FormBuilder,
     private service: AutenticacaoService,
+    private sessaoService: SessaoService,
     private router: Router){}
 
   ngOnInit(): void {
@@ -32,15 +36,20 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.value.email;
     const senha = this.loginForm.value.senha;
 
+    
+    
+
     this.service.autenticar(email, senha).subscribe({
       next: (value) => {
         
         this.usuarioLogado = true;
         console.log("Login com sucesso", value);
         this.msgLogin == value;
-       
+
+        this.salvaUsuarioLogado(email);
+
         setTimeout(() =>  {
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/solicitacao-consultar');
         },
         3000);
 
@@ -48,5 +57,17 @@ export class LoginComponent implements OnInit {
         console.log("Erro no login", err);
       } 
     });
+  }
+
+  salvaUsuarioLogado(email: string){
+    this.sessao = {
+      email: email,
+      token: "",
+      logado: true
+    }
+    
+    this.sessaoService.salvarSessao(this.sessao);
+
+    console.log(">>> "+this.sessaoService.retornarSessao())
   }
 }

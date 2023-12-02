@@ -1,9 +1,4 @@
-export interface Promocao {
-    id: number
-    destino: string
-    imagem: string
-    preco: number
-}
+import { Timestamp } from "rxjs";
 
 export interface PessoaUsuaria {
     nome: string;
@@ -33,9 +28,47 @@ export interface UnidadeFederativa {
     sigla: string;
 }
 
-export interface Depoimento {
+export interface AreaComum {
     id: number;
-    texto: string;
-    autor: string;
-    avatar: string;
+    nome: string;
+}
+
+export interface Setor {
+    id: number;
+    nome: string;
+}
+
+export interface Solicitacao {
+    email: string,
+    setor: Setor,
+    area_comum: AreaComum,
+    assunto: string,
+    descricao: string,
+    data_solicitacao: string
+}
+
+export interface Sessao {
+    email: string,
+    token?: string,
+    logado?: boolean
+}
+
+export interface historicoSolicitacao {
+    solicitacao: string;
+    data: string;
+    setor: string;
+    areaComum: string;
+    statusSolicitacao: string;
+    
+}
+
+export interface SolicitacaoConulta {
+    idSolicitacao: string;
+    assunto: string;
+    setor: Setor;
+    areaComum: AreaComum;
+    descricao: string;
+    dataSolicitacao: string;
+    statusSolicitacao: string;
+
 }

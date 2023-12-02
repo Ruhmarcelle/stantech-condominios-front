@@ -24,8 +24,6 @@ export class CadastroComponent {
     console.log(formCadastro?.getRawValue() as PessoaUsuaria);
 
     if(formCadastro?.valid){
-
-      //var pessoaUsuaria = formCadastro?.getRawValue() as PessoaUsuaria;
      
       var pessoaUsuaria: PessoaUsuaria = {
         nome: formCadastro.get('nome')?.value,
@@ -35,10 +33,12 @@ export class CadastroComponent {
         email: formCadastro.get('email')?.value,
         senha: formCadastro.get('senha')?.value,
         cidade: formCadastro.get('cidade')?.value,
-        unidade: {bloco: formCadastro.get('bloco')?.value, 
-                  apartamento: formCadastro.get('cidade')?.value
+        unidade:{
+                  bloco: formCadastro.get('bloco')?.value, 
+                  apartamento: formCadastro.get('apartamento')?.value
                 },
-        estado: {id: 0, 
+        estado: { 
+                  id: 0, 
                   nome: formCadastro.get('nome')?.value, 
                   sigla: formCadastro.get('sigla')?.value
                 },

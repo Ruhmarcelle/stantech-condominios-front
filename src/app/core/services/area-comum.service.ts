@@ -2,23 +2,23 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UnidadeFederativa } from '../types/type';
+import { AreaComum } from '../types/type';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UnidadeFederativaService {
+export class AreaComumService {
   private apiUrl: string = environment.apiUrl
-  private cache$?: Observable<UnidadeFederativa[]>;
+  private cache$?: Observable<AreaComum[]>;
 
   constructor(
     private http: HttpClient
   ) { 
   }
 
-  listar() : Observable<UnidadeFederativa[]> {
+  listar() : Observable<AreaComum[]> {
     if (!this.cache$) {
-      this.cache$ = this.requestEstados().pipe(
+      this.cache$ = this.getAreaComum().pipe(
         shareReplay(1)
       );
     }
@@ -26,7 +26,7 @@ export class UnidadeFederativaService {
     return this.cache$;
   }
 
-  private requestEstados(): Observable<UnidadeFederativa[]> {
-    return this.http.get<UnidadeFederativa[]>(`${this.apiUrl}/meucondominio/estados/consultar`);
+  private getAreaComum(): Observable<AreaComum[]> {
+    return this.http.get<AreaComum[]>(`${this.apiUrl}/meucondominio/area-comum/consultar`);
   }
 }

@@ -20,14 +20,14 @@
               <input matInput formControlName="nome" placeholder="Nome">
               <mat-error *ngIf="cadastroForm.get('nome')?.errors">Nome é obrigatório</mat-error>
             </mat-form-field>
+
             <div class="grid-item">
               <mat-form-field appearance="outline">
                 <mat-label>Data de Nascimento</mat-label>
                 <input matInput
                   formControlName="nascimento"
                   [matDatepicker]="nascimento"
-                  placeholder="Data de Nascimento"
-                >
+                  placeholder="Data de Nascimento"                >
                 <mat-datepicker-toggle matSuffix [for]="nascimento"></mat-datepicker-toggle>
                 <mat-datepicker #nascimento></mat-datepicker>
                 <mat-error *ngIf="cadastroForm.get('nascimento')?.errors?.['required']">
@@ -50,6 +50,7 @@
                 <mat-error *ngIf="cadastroForm.get('cidade')?.errors">Cidade é obrigatória</mat-error>
               </mat-form-field>
             </div>
+
             <div class="grid-item">
               <div class="radio-group">
                 <label>Gênero</label>
@@ -68,15 +69,17 @@
                 <mat-label>Bloco</mat-label>
                 <input matInput formControlName="bloco" placeholder="Digite o Bloco">
               </mat-form-field>
+
               <app-dropdown-uf
                 label="Estado"
                 placeholder="Estado"
                 [control]="estadoControl">
               </app-dropdown-uf>
+
               <mat-error *ngIf="estadoControl?.errors && estadoControl?.touched">Estado é obrigatório</mat-error>
               
-            </div>
-          </div>
+            </div> <!--<div class="grid-item">-->
+          </div> <!--container-->
         </mat-card-content>
         
         <mat-divider *ngIf="perfilComponent"></mat-divider>
@@ -118,6 +121,7 @@
             Você precisa aceitar os termos e condições para efetuar o cadastro
           </mat-error>
         </mat-card-content>
+
         <mat-card-actions class="full-width">
           <button (click)="executarAcao()" mat-flat-button
             [disabled]="cadastroForm.invalid"
@@ -125,6 +129,7 @@
           >CADASTRAR
           </button>
         </mat-card-actions>
+
       </form>
     </mat-card>
   </app-container>

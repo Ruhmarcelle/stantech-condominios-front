@@ -21,7 +21,6 @@ export class DropdownUfComponent implements OnInit {
 
   constructor(
     private unidadeFederativaService: UnidadeFederativaService) {
-
   }
 
   ngOnInit(): void {
@@ -45,7 +44,6 @@ export class DropdownUfComponent implements OnInit {
     )
     return result
   }
-
 
   displayFn(estado: UnidadeFederativa): string {
     return estado && estado.nome ? estado.nome : '';
